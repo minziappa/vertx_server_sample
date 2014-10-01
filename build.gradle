@@ -1,0 +1,77 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = ''
+
+// apply from: 'gradle/maven.gradle'
+defaultTasks = ['assemble']
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+archivesBaseName = 'vertxWebSocketServer'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+eclipse {
+	classpath {
+		downloadSources=true
+	}
+}
+
+dependencies {
+	compile group: 'commons-configuration', name: 'commons-configuration', version: '1.6'
+	compile group: 'commons-daemon', name: 'commons-daemon', version: '1.0.15'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+	runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.5'
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.13'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.13'
+	compile group: 'org.springframework', name: 'spring-core', version: '3.1.4.RELEASE'
+	compile group: 'org.springframework', name: 'spring-context', version: '3.1.4.RELEASE'
+	compile group: 'org.springframework', name: 'spring-context-support', version: '3.1.4.RELEASE'
+	compile group: 'org.springmodules', name: 'spring-modules-jakarta-commons', version: '0.9'
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	compile group: 'io.vertx', name: 'vertx-core', version: '2.0.2-final'
+	compile group: 'io.vertx', name: 'vertx-platform', version: '2.0.2-final'
+	compile group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.1.2'
+	compile group: 'org.apache.hbase', name: 'hbase', version: '0.94.10'
+}
+
+/*
+task copyToLib(type: Copy) {
+    from configurations.runtime
+	into "$buildDir/output/libs"
+}
+*/
+
+final String DEFAULT_PROFILE = 'staging'
+allprojects {
+	if (!project.hasProperty('profile') || !profile) {
+		ext.profile = DEFAULT_PROFILE
+	}
+    sourceSets {
+        main {
+            resources {
+                srcDir "config/${profile}/resources"
+            }
+        }
+    }
+}
+//  gradle zip -Pprofile=staging
+
+task zip(type: Zip) {
+	from 'src/dist'
+	from jar.outputs.files
+	baseName = 'vertxWebSocketServer'
+	into('libs') {
+		from configurations.runtime
+	}
+}
+
+zip.dependsOn(assemble)
+//assemble.dependsOn(zip)
+// Command is
+// gradle zip

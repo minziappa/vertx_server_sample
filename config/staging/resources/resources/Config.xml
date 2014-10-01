@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+	<gapDate>7</gapDate>
+	<retentionPeriod>10</retentionPeriod>
+	<log>
+		<filename>test.log</filename>
+	</log>
+	<system>
+		<environment>Staging</environment>
+	</system>
+
+	<hdfs>
+		<url>hdfs://develop-hbase01:9000</url>
+		<path>/home/hadoop/data/flume</path>
+	</hdfs>
+
+	<hbase>
+		<master>develop-hbase01:6000</master>
+		<zookeeper>
+			<quorum>develop-hbase01</quorum>
+			<property>
+				<clientPort>2181</clientPort>
+			</property>
+		</zookeeper>
+	</hbase>
+
+</config>
