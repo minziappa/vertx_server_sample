@@ -118,7 +118,7 @@
 	</profiles>
 
 	<dependencies>
-		<!-- Ameba modules.	-->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
