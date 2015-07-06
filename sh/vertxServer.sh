@@ -9,7 +9,7 @@ PROGRAM_NAME=io.sample.vertx.main.VertxWebSocketServerMain
 
 export JAVA_HOME
 
-for f in `find $BASEDIR/lib -type f -name "*.jar"`
+for f in `find $BASEDIR/libs -type f -name "*.jar"`
 do
         CLASSPATH=$CLASSPATH:$f
 done

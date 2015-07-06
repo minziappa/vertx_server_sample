@@ -34,10 +34,8 @@ dependencies {
 	compile group: 'org.springframework', name: 'spring-context-support', version: '3.1.4.RELEASE'
 	compile group: 'org.springmodules', name: 'spring-modules-jakarta-commons', version: '0.8'
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-	compile group: 'io.vertx', name: 'vertx-core', version: '2.0.2-final'
-	compile group: 'io.vertx', name: 'vertx-platform', version: '2.0.2-final'
-	compile group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.1.2'
-	compile group: 'org.apache.hbase', name: 'hbase', version: '0.94.10'
+	compile group: 'io.vertx', name: 'vertx-core', version: '2.1.6'
+	compile group: 'io.vertx', name: 'vertx-platform', version: '2.1.6'
 }
 
 /*
@@ -60,7 +58,7 @@ allprojects {
         }
     }
 }
-//  gradle zip -Pprofile=staging
+//$ gradle zip -Pprofile=staging
 
 task zip(type: Zip) {
 	from 'src/dist'
