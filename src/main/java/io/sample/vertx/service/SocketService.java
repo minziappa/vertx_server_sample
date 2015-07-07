@@ -2,6 +2,8 @@ package io.sample.vertx.service;
 
 public interface SocketService {
 
-	public String getSampleJson (String tableName, String rowKey) throws Exception;
+	public String getSampleOne() throws Exception;
+
+	public String getSampleTwo() throws Exception;
 
 }

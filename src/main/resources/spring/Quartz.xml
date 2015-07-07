@@ -14,7 +14,7 @@
     <bean id="jobDetails" class="io.sample.vertx.quartz.JobDetails" />
     <task:scheduler id="scheduler" pool-size="3"/> <!-- pool-size attribute optional -->
     <task:scheduled-tasks scheduler="scheduler"> <!-- scheduled job list -->
-        <task:scheduled ref="jobDetails" method="executeJob" cron="0/10 * * * * ?"/>
+        <task:scheduled ref="jobDetails" method="executeJob" cron="* * * * * ?"/>
         <!-- Add more job here -->
     </task:scheduled-tasks>
 

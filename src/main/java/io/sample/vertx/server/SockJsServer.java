@@ -53,7 +53,7 @@ public class SockJsServer {
     	logger.info("Just test 3");
 
         // Start the server
-        server.listen(8091, "172.28.153.116");
+        server.listen(8091, "172.17.94.120");
 
 		System.out.println("init - end");
 	}

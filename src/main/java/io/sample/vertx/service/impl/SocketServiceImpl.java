@@ -1,5 +1,13 @@
 package io.sample.vertx.service.impl;
 
+import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
 import io.sample.vertx.service.SocketService;
 
 import org.apache.commons.configuration.Configuration;
@@ -18,14 +26,45 @@ public class SocketServiceImpl implements SocketService {
     private Configuration configuration;
 
 	@Override
-	public String getSampleJson(String tableName, String rowKey) throws Exception {
+	public String getSampleOne() throws Exception {
 
 		JsonObject encodedJson = new JsonObject();
-		
-    	encodedJson.putValue("title1", "contents1");
-    	encodedJson.putValue("title2", "contents2");
+
+		int longChargeTotalSum = 0;
+
+		Map<String, Integer> mapChargeSum = new TreeMap<String, Integer>();
+		DecimalFormat dfHour = new DecimalFormat("00");
+
+		Random rand = new Random();
+		int randomNum1 = rand.nextInt((20 - 1) + 1) + 1;
+		mapChargeSum.put("nowSum", randomNum1);
+		mapChargeSum.put("h" + dfHour.format(0), rand.nextInt((10 - 1) + 1) + 1);
+		mapChargeSum.put("h" + dfHour.format(1), rand.nextInt((10 - 1) + 1) + 1);
+
+		Set<Entry<String, Integer>> set = mapChargeSum.entrySet();
+		Iterator<Entry<String, Integer>> it = set.iterator();
+
+		while(it.hasNext()) {
+			Map.Entry<String, Integer> e = (Map.Entry<String, Integer>)it.next();
+			encodedJson.putValue(e.getKey(), e.getValue());
+			longChargeTotalSum = longChargeTotalSum + e.getValue();
+		}
+		encodedJson.putValue("totalSum", longChargeTotalSum);
+
+
+		int randomNum2 = rand.nextInt((20 - 1) + 1) + 1;
+    	encodedJson.putValue("totalSum", randomNum2);
 
     	return encodedJson.toString();
+	}
+
+	@Override
+	public String getSampleTwo() throws Exception {
+
+		Random rand = new Random();
+		int randomNum = rand.nextInt((20 - 1) + 1) + 1;
+
+		return String.valueOf(randomNum);
 	}
 
 }

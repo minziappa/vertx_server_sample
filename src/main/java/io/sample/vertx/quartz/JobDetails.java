@@ -26,12 +26,14 @@ public class JobDetails {
 
 			JsonObject joMessage = new JsonObject();
 
-			// String jsonMessage = socketService.getSampleJson("tableName", "rowKey");
-	        // joMessage.putString("text", jsonMessage);
+			String jsonMessage = socketService.getSampleOne();
+	        joMessage.putString("text", jsonMessage);
 
-	        String jsonPreviousSum = "{\"keySample\":\"valueSample\"}";
-	        joMessage.putString("sample", jsonPreviousSum);
+	        String jsonPreviousSum = "{\"previousSum\":" + socketService.getSampleTwo() + "}";
+	        joMessage.putString("privousData", jsonPreviousSum);
 
+	        // String jsonPreviousSum = "{\"keySample\":\"valueSample\"}";
+	        // joMessage.putString("sample", jsonPreviousSum);
 	        SockJsServer.eb.publish("app.conduit", joMessage);
 
 		} catch (Exception e) {
